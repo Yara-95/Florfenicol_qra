@@ -1,0 +1,6 @@
+test,result,comment
+"Gaikowski 2010 mean FFA, day 1/2/4/7: observed/predicted (fold)",0.14 / 0.16 / 0.11 / 0.15,<1 means the model over-predicts the concentration level
+Gaikowski 2010 shape: log-slope ratio (obs. half-life 2.32 d),model terminal t1/2 (2-8 d) = 2.13 d,"compares depletion rate, independent of the concentration-level offset"
+"Kosoff 2009 day-1 muscle-skin FFA at 25 C, 10 mg/kg (obs. 7.10 ug/g, as quoted in Gaikowski 2010)",5.6 ug/g (90% CrI 4.7-6.9),concentration-level test against a third study
+"Kosoff 2009 time to 1 ug/g at 25 C, 10 mg/kg (obs. 6.1 d)",7.4 d (90% CrI 6.6-8.4),within calibrated temperature
+"Kosoff 2009 time to 1 ug/g at 30 C, 10 mg/kg (obs. 4.1 d)",4.2 d (90% CrI 3.5-5.1),out-of-sample temperature test
