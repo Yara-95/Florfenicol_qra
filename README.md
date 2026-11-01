@@ -1,31 +1,69 @@
-# Probabilistic Quantitative Risk Assessment (QRA) of Florfenicol in Nile Tilapia Recirculating Aquaculture Systems (RAS)
+Probabilistic Quantitative Risk Assessment (QRA) of Florfenicol in Nile Tilapia RAS
 
-[![One Health Framework](https://img.shields.io/badge/One%20Health-QRA%20%26%20AMR-blue)](https://github.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
+Overview
 
-## Overview
-This repository contains the complete codebase, data pipelines, pharmacokinetic-environmental models, and quality assurance checks for the manuscript:
+This repository contains the probabilistic One Health risk assessment framework for florfenicol administration in Nile tilapia (Oreochromis niloticus) reared in Recirculating Aquaculture Systems (RAS). The model unifies food safety endpoints (tissue depletion, withdrawal periods, and acceptable daily intake) with environmental stewardship and resistance selection dynamics.
 
-> **"Florfenicol in Nile tilapia recirculating aquaculture: a probabilistic risk assessment of withdrawal, dietary exposure and effluent load"**
+Manuscript Title: Florfenicol in Nile tilapia recirculating aquaculture: a probabilistic risk assessment of withdrawal, dietary exposure and effluent load
 
-The study bridges a critical gap in aquaculture research by integrating **food safety (fillet withdrawal times and ADI shares)** and **environmental stewardship (antimicrobial resistance selection and effluent load optimization)** into a single mass-conserving quantitative risk assessment (QRA) framework under a **One Health** approach.
+Key Features
 
----
+Integrated PK & Mass-Balance Model: Links dynamic fish pharmacokinetic compartments (gut, central, muscle) directly to system water, biofilter sorption, and effluent discharges.
 
-## Key Model Features
-1. **Bayesian Pharmacokinetic (PK) Modeling:** Calibrated using MCMC (Adaptive Metropolis sampling) against published Nile tilapia muscle-skin florfenicol amine (FFA) and serum datasets.
-2. **Thermal & Allometric Scaling:** Incorporates temperature dependence ($Q_{10}$) and body-mass exponents ($b$) to simulate withdrawal dynamics across variable commercial conditions (25–30 °C, 100–500 g fish).
-3. **RAS Mass-Balance Environmental Fate:** Couples fish excretion, unabsorbed feed/faeces, and uneaten feed dynamics to water exchange rates ($q_{ex}$), biofilter sorption ($k_{sed}$), and degradation ($k_{deg}$).
-4. **AMR Risk Characterization:** Evaluates in-system Predicted Environmental Concentrations (PEC) against the resistance-selection Predicted No-Effect Concentration ($\text{PNEC}_{res} = 2\ \mu\text{g/L}$).
-5. **Robust Quality Assurance:** Includes independent automated verification scripts (`qa_checks.py`) for mass conservation, analytical solutions, and sensitivity analyses.
+Biofilter AMR Dynamics: Simulates resistance selection pressure versus fitness cost in active biofilters under varying residual exposure.
 
----
+Thermal Regime Modeling: Incorporates $Q_{10}$ temperature scaling to evaluate operational scenarios, thermal variations, and climate-driven heatwave surges.
 
-## Repository Structure
-```text
-├── florfenicol_qra_v3.ipynb       # Main Jupyter Notebook (Model, MCMC calibration, scenarios, & plots)
-├── qa_checks.py                   # Automated QA script for reproducibility and stress tests
-├── qa_checks_results.txt          # Output logs from QA verification checks
-├── manuscript.docx                # Full manuscript draft (npj Science of Food format)
+Global Sensitivity Analysis (Sobol Indices): Quantifies variance-based first-order ($S_1$) parameter sensitivities governing environmental discharge loads.
+
+Eco-Economic Optimization: Evaluates optimal daily water exchange rates ($q_{ex}$) paired with effluent treatment efficiency ($\eta$) to minimize operational cost and active drug emissions.
+
+Automated Quality Assurance: Includes inline checks for analytical correctness, experimental anchor validation, and environmental sink stress testing.
+
+Repository Structure
+
+├── florfenicol_qra_ras.ipynb       # Complete Jupyter Notebook (Model, QA Checks, Sobol GSA, & Optimization)
+├── scenario_summary.csv           # Model outputs across temperature and water exchange scenarios
+├── sensitivity_prcc.csv           # Partial rank correlation coefficients for key parameters
 └── README.md                      # Project documentation
+
+
+Quick Start & Dependencies
+
+Prerequisites
+
+Ensure Python 3.8+ is installed along with the required numerical and analytical packages:
+
+pip install numpy pandas scipy matplotlib
+
+
+Running the Notebook
+
+Open and execute florfenicol_qra_ras.ipynb using Jupyter Notebook or Google Colab:
+
+jupyter notebook florfenicol_qra_ras.ipynb
+
+
+The notebook executes sequentially:
+
+Parameter sampling via Latin Hypercube Sampling (LHS).
+
+Dynamic ordinary differential equation (ODE) mass-balance simulations.
+
+Inline Quality Assurance (QA) and identifiability checks.
+
+Sobol global sensitivity analysis.
+
+Eco-economic optimization using L-BFGS-B minimization.
+
+Main Conclusions
+
+Food Safety: The 99th-percentile fillet tissue depletion falls reliably below the maximum residue limit ($\text{MRL} = 1.0\ \mu\text{g/g}$) well within standard label withdrawal periods (median $t_{99}$ ranges from 3.0 to 11.9 days).
+
+The Exchange Paradox: Increasing daily water exchange lowers in-system water concentrations but proportionally escalates total discharged active drug load into receiving aquatic ecosystems.
+
+AMR Risk & Mitigation: System water concentrations exceed resistance selection thresholds ($\text{PNEC}_{res} = 1.3\ \mu\text{g/L}$) during therapeutic courses; high-efficiency effluent treatment ($\ge 90\%$) serves as the primary environmental control measure.
+
+License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
